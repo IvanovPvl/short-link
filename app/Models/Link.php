@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Link
  * @package App\Models
+ * @property int $id
+ * @property string $short
+ * @property string $created_at
+ * @property Stat[] $stats
  */
 class Link extends Model
 {
