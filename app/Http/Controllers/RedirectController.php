@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Link;
+use App\Models\Stat;
 
 /**
  * Class RedirectController
@@ -13,10 +15,11 @@ use App\Models\Link;
 class RedirectController extends Controller
 {
     /**
+     * @param Request $request
      * @param $short
-     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
-    public function get($short)
+    public function get(Request $request, $short)
     {
         try {
             $link = Link::where('short', $short)->firstOrFail();
@@ -28,6 +31,7 @@ class RedirectController extends Controller
             ], 404);
         }
 
+        Stat::perform($request, $link->id);
         return redirect($link->link);
     }
 }

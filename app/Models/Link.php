@@ -10,7 +10,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Link extends Model
 {
+    const UPDATED_AT = null;
+
     protected $fillable = ['link', 'short'];
 
     protected $visible = ['link', 'short'];
+
+    /**
+     * Get statistics for the link.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stats()
+    {
+        return $this->hasMany(Stat::class);
+    }
 }

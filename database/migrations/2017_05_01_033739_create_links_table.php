@@ -17,7 +17,7 @@ class CreateLinksTable extends Migration
             $table->increments('id');
             $table->text('link');
             $table->string('short')->unique();
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 
