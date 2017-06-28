@@ -12,8 +12,6 @@ use App\Models\Link;
  */
 class ShortCreator implements ShortCreatorContract
 {
-    public const START_SHORT = '0';
-
     /** @var  EncoderContract */
     private $encoder;
 
@@ -31,20 +29,9 @@ class ShortCreator implements ShortCreatorContract
      */
     public function next(string $url): Link
     {
-        $last = Link::orderBy('id', 'DESC')
-            ->take(1)
-            ->first();
-
-        if (!$last) {
-            $next = '0';
-        } else {
-            $encoded = $this->encoder->encode($last->short);
-            $next = $this->encoder->decode(++$encoded);
-        }
-
-        return Link::create([
-            'link'  => $url,
-            'short' => $next
-        ]);
+        $link = Link::create(['link' => $url]);
+        $short = $this->encoder->decode($link->id);
+        $link->update(['short' => $short]);
+        return $link;
     }
 }
