@@ -2,9 +2,12 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\Artisan;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 
+/**
+ * Class TestCase
+ * @package Tests
+ */
 abstract class TestCase extends BaseTestCase
 {
     /**
@@ -15,15 +18,5 @@ abstract class TestCase extends BaseTestCase
     public function createApplication()
     {
         return require __DIR__.'/../bootstrap/app.php';
-    }
-
-    public function artisanMigrate()
-    {
-        Artisan::call('migrate');
-    }
-
-    public function artisanMigrateReset()
-    {
-        Artisan::call('migrate:reset');
     }
 }
