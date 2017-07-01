@@ -1,7 +1,7 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "ivanovpvl/short-link",
+    "description": "Simple API for short link creation.",
+    "keywords": ["framework", "laravel", "lumen", "api"],
     "license": "MIT",
     "type": "project",
     "require": {
