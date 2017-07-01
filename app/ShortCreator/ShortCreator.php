@@ -27,7 +27,7 @@ class ShortCreator implements ShortCreatorContract
      * @param string $url
      * @return Link
      */
-    public function next(string $url): Link
+    public function short(string $url): Link
     {
         $link = Link::create(['link' => $url]);
         $short = $this->encoder->decode($link->id);

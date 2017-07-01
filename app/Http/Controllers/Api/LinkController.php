@@ -37,6 +37,6 @@ class LinkController extends Controller
             'url' => 'required|url',
         ]);
 
-        return $this->shortCreator->next($request->input('url'));
+        return $this->shortCreator->short($request->input('url'));
     }
 }

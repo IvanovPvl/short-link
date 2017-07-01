@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 use App\Models\Link;
 use App\Http\Controllers\Controller;
 
@@ -23,16 +21,7 @@ class StatController extends Controller
      */
     public function show($short)
     {
-        try {
-            $link = Link::where('short', $short)->firstOrFail();
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'error' => [
-                    'message' => 'Link not found'
-                ]
-            ], 404);
-        }
-
+        $link = Link::where('short', $short)->firstOrFail();
         return $link->stats()->paginate(self::PER_PAGE);
     }
 }

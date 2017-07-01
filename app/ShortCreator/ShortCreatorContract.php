@@ -12,5 +12,5 @@ use App\Models\Link;
  */
 interface ShortCreatorContract
 {
-    public function next(string $url): Link;
+    public function short(string $url): Link;
 }
