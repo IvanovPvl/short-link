@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use App\Models\Link;
@@ -19,17 +18,13 @@ class StatController extends Controller
     /**
      * Get statistics for the link.
      *
-     * @param Request $request
+     * @param string  $short
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function show($short)
     {
-        $this->validate($request, [
-            'short' => 'required|string',
-        ]);
-
         try {
-            $link = Link::where('short', $request->input('short'))->firstOrFail();
+            $link = Link::where('short', $short)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => [

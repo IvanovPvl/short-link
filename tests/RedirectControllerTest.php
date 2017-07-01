@@ -5,7 +5,10 @@ namespace Tests;
 use Symfony\Component\HttpFoundation\Response;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
-use App\Models\Link;
+use App\Models\{
+    Link,
+    Stat
+};
 
 /**
  * Class RedirectControllerTest
@@ -37,8 +40,12 @@ class RedirectControllerTest extends TestCase
         /** @var Link $link */
         $link = factory(Link::class)->create();
 
+        $this->assertCount(0, Stat::all());
+
         $this->get("/{$link->short}");
         $this->assertResponseStatus(Response::HTTP_FOUND);
         $this->assertEquals($link->link, $this->response->headers->get('location'));
+
+        $this->assertCount(1, Stat::all());
     }
 }
